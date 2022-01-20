@@ -1,21 +1,21 @@
 pragma solidity =0.6.6;
 
-import '../interfaces/IPancakePair.sol';
+import '../interfaces/ISwappiPair.sol';
 import '@uniswap/lib/contracts/libraries/Babylonian.sol';
 import '@uniswap/lib/contracts/libraries/TransferHelper.sol';
 
 import '../interfaces/IERC20.sol';
-import '../interfaces/IPancakeRouter01.sol';
+import '../interfaces/ISwappiRouter01.sol';
 import '../libraries/SafeMath.sol';
-import '../libraries/PancakeLibrary.sol';
+import '../libraries/SwappiLibrary.sol';
 
 contract ExampleSwapToPrice {
     using SafeMath for uint256;
 
-    IPancakeRouter01 public immutable router;
+    ISwappiRouter01 public immutable router;
     address public immutable factory;
 
-    constructor(address factory_, IPancakeRouter01 router_) public {
+    constructor(address factory_, ISwappiRouter01 router_) public {
         factory = factory_;
         router = router_;
     }
@@ -62,7 +62,7 @@ contract ExampleSwapToPrice {
         bool aToB;
         uint256 amountIn;
         {
-            (uint256 reserveA, uint256 reserveB) = PancakeLibrary.getReserves(factory, tokenA, tokenB);
+            (uint256 reserveA, uint256 reserveB) = SwappiLibrary.getReserves(factory, tokenA, tokenB);
             (aToB, amountIn) = computeProfitMaximizingTrade(
                 truePriceTokenA, truePriceTokenB,
                 reserveA, reserveB
