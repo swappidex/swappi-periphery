@@ -267,7 +267,7 @@ contract SwappiRouter01 is ISwappiRouter01 {
     }
 
     function getAmountIn(uint amountOut, uint reserveIn, uint reserveOut) public pure override returns (uint amountIn) {
-        return SwappiLibrary.getAmountOut(amountOut, reserveIn, reserveOut);
+        return SwappiLibrary.getAmountIn(amountOut, reserveIn, reserveOut);
     }
 
     function getAmountsOut(uint amountIn, address[] memory path) public view override returns (uint[] memory amounts) {
