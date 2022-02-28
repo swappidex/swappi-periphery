@@ -21,14 +21,13 @@ library SwappiLibrary {
                 hex'ff',
                 factory,
                 keccak256(abi.encodePacked(token0, token1)),
-                hex'7465e69c5487434de7dcb542de55d2f32835c80a18d7216f3dbe2a4efded9dac' // init code hash
+                hex'e9013b07c22e5f47a6c477cffbbef5afdb24c90dedb1e8eacd17963f07186901' // init code hash
             ))));
     }
 
     // fetches and sorts the reserves for a pair
     function getReserves(address factory, address tokenA, address tokenB) internal view returns (uint reserveA, uint reserveB) {
         (address token0,) = sortTokens(tokenA, tokenB);
-        pairFor(factory, tokenA, tokenB);
         (uint reserve0, uint reserve1,) = ISwappiPair(pairFor(factory, tokenA, tokenB)).getReserves();
         (reserveA, reserveB) = tokenA == token0 ? (reserve0, reserve1) : (reserve1, reserve0);
     }
